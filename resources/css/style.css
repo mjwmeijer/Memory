@@ -21,6 +21,7 @@ p {
 }
 
 .container{
+  min-height:90%;
   margin-top:5.25rem;
 }
 
