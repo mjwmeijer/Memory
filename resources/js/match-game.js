@@ -1,12 +1,16 @@
 var MatchGame = {};
 var numberOfMoves=0;
+var newCard='';
 
 /*
   Sets up a new game after HTML document has loaded.
   Renders a 4x4 or 6*6 board of cards.
 */
 $(document).ready(function(){
-  $('#game').attr({'data-keuze':'getallen','data-aantal':'16'}); //indien geen keuze wordt gemaakt
+  for (i=0;i<16;i++){
+    newCard = $('<div></div>').addClass('card col-sm-3');
+    $('#game').append(newCard);
+  }
 
   $('.btn').click(function(){
     $(this).attr('disabled',true);
@@ -28,19 +32,19 @@ $(document).ready(function(){
     $('#letters, #rekenen, #getallen').remove();
   })
 
-      $('#plaatjes').click(function(){
+  $('#plaatjes').click(function(){
+    $('#advanced').remove();
+      })
+
+  $('#beginner').click(function(){
         $('#advanced').remove();
       })
 
-      $('#beginner').click(function(){
-        $('#advanced').remove();
-      })
-
-      $('#advanced').click(function(){
+  $('#advanced').click(function(){
         $('#beginner').remove();
       })
 
-      $('.btn').click(function() {
+  $('.btn').click(function() {
       $('#game').attr({'data-keuze':$(this).data('keuze'),
     'data-aantal':$(this).data('aantal')});
       $(this).css('background-color','violet')
@@ -53,9 +57,7 @@ $(document).ready(function(){
 location.reload();
   });
 
-  MatchGame.renderCards(MatchGame.generateCardValues(8),$('#game'));
-
-  $('#beginner').click(function() {
+    $('#beginner').click(function() {
     MatchGame.renderCards(MatchGame.generateCardValues(8),$('#game'))});
 
     $('#advanced').click(function() {
@@ -116,8 +118,8 @@ for(i=0;i<cardValues.length;i++){
     src:cardValues[i].picture
   }
   if(cardValues.length===16)
-  {var newCard = $('<div></div>').addClass('card col-sm-3').data(generateCard)}
-  else   {var newCard = $('<div></div>').addClass('card col-sm-2').data(generateCard);}
+  {newCard = $('<div></div>').addClass('card col-sm-3').data(generateCard)}
+  else   {newCard = $('<div></div>').addClass('card col-sm-2').data(generateCard);}
 
 console.log($(newCard).data('isFlipped'))
 
