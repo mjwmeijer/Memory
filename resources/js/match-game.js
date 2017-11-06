@@ -12,23 +12,29 @@ $(document).ready(function(){
     $('#game').append(newCard);
   }
 
+  $('#beginner,#advanced').attr('disabled',true);
+
   $('.btn').click(function(){
     $(this).attr('disabled',true);
   })
 
   $('#getallen').click(function(){
+    $('#beginner,#advanced').attr('disabled',false);
     $('#letters, #rekenen, #plaatjes').remove();
   })
 
   $('#letters').click(function(){
+    $('#beginner,#advanced').attr('disabled',false);
     $('#getallen, #rekenen, #plaatjes').remove();
   })
 
   $('#rekenen').click(function(){
+    $('#beginner,#advanced').attr('disabled',false);
     $('#letters, #getallen, #plaatjes').remove();
   })
 
   $('#plaatjes').click(function(){
+    $('#beginner').attr('disabled',false);
     $('#letters, #rekenen, #getallen').remove();
   })
 
