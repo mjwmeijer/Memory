@@ -8,8 +8,36 @@ var numberOfMoves=0;
 $(document).ready(function(){
   $('#game').attr({'data-keuze':'getallen','data-aantal':'16'}); //indien geen keuze wordt gemaakt
 
+  $('.btn').click(function(){
+    $(this).attr('disabled',true);
+  })
+
+  $('#getallen').click(function(){
+    $('#letters, #rekenen, #plaatjes').remove();
+  })
+
+  $('#letters').click(function(){
+    $('#getallen, #rekenen, #plaatjes').remove();
+  })
+
+  $('#rekenen').click(function(){
+    $('#letters, #getallen, #plaatjes').remove();
+  })
+
+  $('#plaatjes').click(function(){
+    $('#letters, #rekenen, #getallen').remove();
+  })
+
       $('#plaatjes').click(function(){
         $('#advanced').remove();
+      })
+
+      $('#beginner').click(function(){
+        $('#advanced').remove();
+      })
+
+      $('#advanced').click(function(){
+        $('#beginner').remove();
       })
 
       $('.btn').click(function() {
@@ -48,9 +76,9 @@ MatchGame.generateCardValues = function (aantal) {
 ['20-2','6+6+6']]
   for(i=1;i<aantal+1;i++){
     verzamelingGeordend.push({number:i,
-    letter:letters[i-1],uitkomst:rekenen[i-1][0],picture:"url(\"hexapod"+i+".png\")"});
+    letter:letters[i-1],uitkomst:rekenen[i-1][0],picture:"url(\"vlinder"+i+".jpg\")"});
     verzamelingGeordend.push({number:i,
-    letter:letters[i-1],uitkomst:rekenen[i-1][1],picture:"url(\"hexapod"+i+".png\")"});
+    letter:letters[i-1],uitkomst:rekenen[i-1][1],picture:"url(\"vlinder"+i+".jpg\")"});
   }
   var verzamelingRandom =[];
   while(verzamelingGeordend.length>0){
@@ -155,11 +183,23 @@ case "rekenen":
               'background-color':'rgb(153, 153, 153)',
               'color': 'rgb(204, 204, 204)',
               };
-            flippedCards[0].css(matchCss);
-            flippedCards[1].css(matchCss);
-            flippedCards2.push(flippedCards[0]);
-            flippedCards2.push(flippedCards[1]);
-            } else {
+            var matchCssPlaatjes ={
+              'opacity':0.4
+            };
+
+          if($game.attr('data-keuze')==='plaatjes'){
+            flippedCards[0].css(matchCssPlaatjes);
+            flippedCards[1].css(matchCssPlaatjes);
+            }
+          else {flippedCards[0].css(matchCss);
+          flippedCards[1].css(matchCss);}
+
+          flippedCards2.push(flippedCards[0]);
+          flippedCards2.push(flippedCards[1]);
+        }
+
+
+            else {
             var card1 = flippedCards[0];
             var card2 = flippedCards[1];
             window.setTimeout(function() {
