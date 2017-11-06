@@ -37,6 +37,10 @@ p {
   cursor:pointer;
 }
 
+.col-sm-2 {
+height:9rem;
+}
+
 .btn{
   cursor:pointer;
 }
@@ -71,10 +75,8 @@ p {
         height:11rem;
         font-size: 5rem;
       }
+      .col-sm-2 {
+      height:8rem;
+      }
 
     }
-
-  @media only screen and (max-width: 1024px) and (orientation:landscape) {
-  .container {margin-top:0px;
-    }
-  }
