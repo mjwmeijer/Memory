@@ -96,8 +96,10 @@ console.log($(newCard).data('isFlipped'))
 $($game).append(newCard);
 }
 
+/*
 var cardWidth = $('.card').outerWidth();
 $('.card').css('height',cardWidth);
+*/
 
 $('.card').click(function() {
   MatchGame.flipCard($(this), $('#game'));
