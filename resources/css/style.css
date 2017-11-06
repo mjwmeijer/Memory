@@ -81,3 +81,18 @@ height:9rem;
       }
 
     }
+
+    @media only screen and (max-width: 480px) {
+
+        html {
+          font-size:8px;
+          }
+        .card{
+            height:7rem;
+            font-size: 3rem;
+          }
+          .col-sm-2 {
+          height:4rem;
+          }
+
+        }
