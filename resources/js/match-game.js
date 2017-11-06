@@ -20,25 +20,30 @@ $(document).ready(function(){
 
   $('#getallen').click(function(){
     $('#beginner,#advanced').attr('disabled',false);
-    $('#letters, #rekenen, #plaatjes').remove();
+    $('#letters, #rekenen, #plaatjes,#schilders').remove();
   })
 
   $('#letters').click(function(){
     $('#beginner,#advanced').attr('disabled',false);
-    $('#getallen, #rekenen, #plaatjes').remove();
+    $('#getallen, #rekenen, #plaatjes,#schilders').remove();
   })
 
   $('#rekenen').click(function(){
     $('#beginner,#advanced').attr('disabled',false);
-    $('#letters, #getallen, #plaatjes').remove();
+    $('#letters, #getallen, #plaatjes,#schilders').remove();
   })
 
   $('#plaatjes').click(function(){
     $('#beginner').attr('disabled',false);
-    $('#letters, #rekenen, #getallen').remove();
+    $('#letters, #rekenen, #getallen,#schilders').remove();
   })
 
-  $('#plaatjes').click(function(){
+  $('#schilders').click(function(){
+    $('#beginner').attr('disabled',false);
+    $('#letters, #rekenen, #getallen,#plaatjes').remove();
+  })
+
+  $('#plaatjes,#schilders').click(function(){
     $('#advanced').remove();
       })
 
@@ -76,17 +81,28 @@ location.reload();
 
 
 MatchGame.generateCardValues = function (aantal) {
+
   var verzamelingGeordend =[];
   var letters = ['a','b','d','e','aa','f','h','ee','oe','k','i','m','n','oo','r','s','t','ij'];
   var rekenen =[['10+2','6+6'],['4+3','3+4'],['2+2','6-2'],
   ['3-1','1+1'],['3-2','1'],['6-3','2+1'],['7-2','4+1'],['3+3','1+5'],['4+4','4+4'],['5+4','6+3'],
 ['3+7','13-3'],['2+9','1+10'],['9+4','2+11'],['16-2','7+7'],['18-3','6+9'],['8+8','1+15'],['9+8','3+14'],
 ['20-2','6+6+6']]
+  var schilders =[['url(\"canvas.jpg\")','url(\"theovandoesburg.jpg\")'],['url(\"driekoningen.jpg\")','url(\"jansteen.jpg\")'],
+['url(\"franshals.jpg\")','url(\"schutters.jpg\")'],['url(\"karelappel.jpg\")','url(\"vogel.jpg\")'],
+['url(\"meisje.jpg\")','url(\"vermeer.jpg\")'],['url(\"nachtwacht.jpg\")','url(\"rembrandt.jpg\")'],
+['url(\"pietmondriaan.png\")','url(\"vlakken.jpg\")'],['url(\"slaapkamer.jpg\")','url(\"vincent.png\")'],
+['a','a'],['b','b'],
+['c','c'],['d','d'],
+['e','e'],['f','f'],
+['g','g'],['h','h'],
+['i','i'],['j','j']]
+
   for(i=1;i<aantal+1;i++){
     verzamelingGeordend.push({number:i,
-    letter:letters[i-1],uitkomst:rekenen[i-1][0],picture:"url(\"vlinder"+i+".jpg\")"});
+    letter:letters[i-1],uitkomst:rekenen[i-1][0],picture:"url(\"vlinder"+i+".jpg\")",schilder:schilders[i-1][0]});
     verzamelingGeordend.push({number:i,
-    letter:letters[i-1],uitkomst:rekenen[i-1][1],picture:"url(\"vlinder"+i+".jpg\")"});
+    letter:letters[i-1],uitkomst:rekenen[i-1][1],picture:"url(\"vlinder"+i+".jpg\")",schilder:schilders[i-1][1]});
   }
   var verzamelingRandom =[];
   while(verzamelingGeordend.length>0){
@@ -121,7 +137,7 @@ for(i=0;i<cardValues.length;i++){
     cardPicture:cardValues[i].picture,
     isFlipped:false,
     kleur:kleuren[cardValues[i].number-1],
-    src:cardValues[i].picture
+    cardSchilder:cardValues[i].schilder,
   }
   if(cardValues.length===16)
   {newCard = $('<div></div>').addClass('card col-sm-3').data(generateCard)}
@@ -166,6 +182,10 @@ else if($game.attr('data-keuze')==='plaatjes'){
   $card.css({'background-image':$card.data('cardPicture'),'background-size':'cover'}).data('isFlipped',true)
   }
 
+  else if($game.attr('data-keuze')==='schilders'){
+    $card.css({'background-image':$card.data('cardSchilder'),'background-size':'cover'}).data('isFlipped',true)
+    }
+
 else {$card.css('background-color',$card.data('kleur')).data('isFlipped',true);
 switch($game.attr('data-keuze')){
 case "letters":
@@ -195,7 +215,7 @@ case "rekenen":
               'opacity':0.4
             };
 
-          if($game.attr('data-keuze')==='plaatjes'){
+          if($game.attr('data-keuze')==='plaatjes'||$game.attr('data-keuze')==='schilders'){
             flippedCards[0].css(matchCssPlaatjes);
             flippedCards[1].css(matchCssPlaatjes);
             }
