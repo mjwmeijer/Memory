@@ -7,9 +7,11 @@ var newCard='';
   Renders a 4x4 or 6*6 board of cards.
 */
 $(document).ready(function(){
-  for (i=0;i<16;i++){
-    newCard = $('<div></div>').addClass('card col-sm-3');
-    $('#game').append(newCard);
+  for (i=0;i<16;i++){if(
+    $(window).width()<480 //je kunt ook standaard col-3 nemen
+  ) {newCard = $('<div></div>').addClass('card col-3');}
+  else {newCard = $('<div></div>').addClass('card col-sm-3');}
+        $('#game').append(newCard);
   }
 
   $('#beginner,#advanced').attr('disabled',true);
@@ -140,8 +142,8 @@ for(i=0;i<cardValues.length;i++){
     cardSchilder:cardValues[i].schilder,
   }
   if(cardValues.length===16)
-  {newCard = $('<div></div>').addClass('card col-sm-3').data(generateCard)}
-  else   {newCard = $('<div></div>').addClass('card col-sm-2').data(generateCard);}
+  {newCard = $('<div></div>').addClass('card col-3').data(generateCard)}
+    else {newCard = $('<div></div>').addClass('card col-sm-2').data(generateCard);}
 
 console.log($(newCard).data('isFlipped'))
 
